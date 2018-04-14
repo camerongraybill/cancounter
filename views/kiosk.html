@@ -2,9 +2,105 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>KIOSK</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <title>Kiosk Landing Page</title>
 </head>
 <body>
 
+<div class="row">
+    <div class="project-name col-sm-6">
+        <b>Can Deux</b>
+    </div>
+    <div class="total-money-counter col-sm-6">
+        <b>Lifetime money raised:</b> <br/><span id="totalMoney">over 9000!</span>
+    </div>
+</div>
+
+
+<div id="kioskWrapper">
+    <div class="header-msg">
+        <h1>Insert your cans above</h1>
+    </div>
+    <div class="past-hour-money">
+        <b>Dollars raised in past hour:</b> <span id="pastHourMoney">over 9000!</span>
+    </div>
+
+
+    <div><b>Our current cause:</b>
+        <br/>
+        <span id="charityName">Charity name</span>
+        <div><img id="currentCharityLogo" src="https://www.freelogodesign.org/img/slide-logo-1.png"></div>
+    </div>
+
+    <button id="charityInfoBtn" class="btn btn-info btn-lg">Learn more about our current charity</button>
+</div>
 </body>
+
 </html>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        function getCharityInfo(name) {
+            $.ajax(
+                {
+                    url: "/api/charities/" + name,
+                    type: 'GET',
+                    success: function (result) {
+                        let charityName = result.name;
+                        $('#charityName').html(name);
+                        $('#currentCharityLogo').attr('src', result.imgurl)
+                    },
+                    error: function(e) {
+                        console.log(e);
+                    }
+                }
+            );
+        }
+
+        $.ajax(
+            {
+                url: "/api/kiosks/" + 'demo',
+                type: 'GET',
+                success: function (result) {
+                    let money = result.total_earned;
+                    let moneyPastHour = result.total_earned; //TODO: FIXME
+                    $("#totalMoney").html(money);
+                    $("#pastHourMoney").html(moneyPastHour);
+                },
+                error: function(e) {
+                    console.log(e);
+                }
+            }
+        );
+        $.ajax(
+            {
+                url: "/api/charities/current",
+                type: 'GET',
+                success: function (result) {
+                    let charityName = result.name;
+                    getCharityInfo(charityName);
+                },
+                error: function(e) {
+                    console.log(e);
+                }
+            }
+        );
+
+        $('#charityInfoBtn').click(function() {
+
+        });
+
+    });
+
+
+
+</script>

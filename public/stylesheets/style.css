@@ -6,3 +6,31 @@ body {
 a {
   color: #00B7FF;
 }
+
+/* Kiosk page styles */
+#kioskWrapper {
+    font-size: 18px;
+    text-align: center;
+}
+
+#currentCharityLogo {
+    width: 250px;
+    padding: 15px;
+}
+
+.total-money-counter {
+    text-align: right;
+}
+
+.project-name {
+    color: green;
+    font-size: 24px;
+}
+
+.past-hour-money {
+    padding: 10px;
+}
+
+
+/* Charity Page Styles */
+
