@@ -20,7 +20,7 @@ const init_tables = (db, next) => {
         end_time timestamp unique,
         charity_name varchar(128),
         foreign key (charity_name) references charities (name),
-        primary key (start_time, end_time)
+        primary key (start_time)
     )
     `,
     `
@@ -73,7 +73,7 @@ const init_tables = (db, next) => {
     and k.id = h.id
     `,
     `
-    create or replace view c as
+    create or replace view charity_totals as
     select .03 * count(*) as total_earned, count(*) as total_cans, k.name as charity_name
     from charities k, can_submissions c
     where k.name = c.charity

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="stylesheets/style.css"/>
@@ -11,7 +11,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+<<<<<<< HEAD
     <link href="https://fonts.googleapis.com/css?family=Cherry+Cream+Soda" rel="stylesheet">
+=======
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
+>>>>>>> fd93b149ea1b332931880fdbd9acbeae17446286
     <title>Kiosk Landing Page</title>
 </head>
 <body>
@@ -49,6 +53,13 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
+        const socket = io();
+        socket.on('new_data', function(new_data) {
+            let money = "$" + new_data.total_earned;
+            let moneyPastHour = "$" + new_data.money_in_last_hour;
+            $("#totalMoney").html(money);
+            $("#pastHourMoney").html(moneyPastHour);
+        });
         function getCharityInfo(name) {
             $.ajax(
                 {
@@ -71,10 +82,17 @@
                 url: "/api/kiosks/" + 'demo',
                 type: 'GET',
                 success: function (result) {
+<<<<<<< HEAD
                     let money = result.total_earned;
                     let moneyPastHour = result.money_in_last_hour;
                     $("#totalMoney").html('$'+money);
                     $("#pastHourMoney").html('$'+moneyPastHour);
+=======
+                    let money = "$" + result.total_earned;
+                    let moneyPastHour = "$" + result.money_in_last_hour;
+                    $("#totalMoney").html(money);
+                    $("#pastHourMoney").html(moneyPastHour);
+>>>>>>> fd93b149ea1b332931880fdbd9acbeae17446286
                 },
                 error: function(e) {
                     console.log(e);

@@ -44,8 +44,13 @@ router.route("/:name/add")
                         db.query("insert into can_submissions values ($1, now(), $2)", [name_rows.rows[0]['id'], active_charity.rows[0]['charity_name']], (err) => {
                             if (err)
                                 next(err);
-                            else
+                            else {
                                 res.sendStatus(200);
+                                db.query("select * from kiosk_summary where name = $1", [req.params.name], (err, summary_rows) => {
+                                    require("../index").send_update(summary_rows.rows[0]);
+                                });
+                            }
+
                         });
                 })
         });
