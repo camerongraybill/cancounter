@@ -4,7 +4,7 @@ const kiosk_router = new Router();
 
 kiosk_router.route("")
     .get((req, res, next) => {
-        res.render("kiosk");
+        res.render("charities");
     });
 
 module.exports = kiosk_router;
