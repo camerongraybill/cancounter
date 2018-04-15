@@ -17,7 +17,6 @@ router.route("/:name")
     .get((req, res, next) => {
         // Return specific kiosk
         db.query("select * from kiosk_summary k where k.name = $1", [req.params.name], (err, rows) => {
-            console.log(rows);
             if (err)
                 next(err);
             else if (rows.rows.length === 0)
