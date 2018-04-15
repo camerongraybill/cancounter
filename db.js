@@ -75,7 +75,7 @@ const init_tables = (db, next) => {
     `
     create or replace view charity_totals as
     select .03 * count(*) as total_earned, count(*) as total_cans, k.name as charity_name
-    from charities l, can_submissions c
+    from charities k, can_submissions c
     where k.name = c.charity
     group by k.name
     `,
