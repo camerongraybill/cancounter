@@ -17,7 +17,7 @@ router.route("/:name")
     .get((req, res, next) => {
         // Return specific charity
         if (req.params.name === "current") {
-            db.query("select * from charity c, active_ranges a where a.charity_name = c.name and a.end_time is null", (err, rows) => {
+            db.query("select * from charities c, active_ranges a where a.charity_name = c.name and a.end_time is null", (err, rows) => {
                 if (err)
                     next(err);
                 else
