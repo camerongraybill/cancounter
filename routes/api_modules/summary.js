@@ -5,6 +5,7 @@ db = require("../../db").db;
 router.route("")
     .get((req, res) => {
         // Return summaries
+
     });
 
 
