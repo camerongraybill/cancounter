@@ -11,8 +11,6 @@ const init_tables = (db, next) => {
         description text,
         location varchar(256),
         website_url varchar(128),
-        total_earned float4 default 0,
-        total_cans int default 0,
         added date default CURRENT_DATE
     )
     `,
@@ -73,8 +71,20 @@ const init_tables = (db, next) => {
     where k.id = r.id
     and k.id = t.id
     and k.id = h.id
+    `,
     `
-
+    create or replace view charity_totals as
+    select .03 * count(*) as total_earned, count(*) as total_cans, k.name as charity_name
+    from charities l, can_submissions c
+    where k.name = c.charity
+    group by k.name
+    `,
+    `
+    create or replace view charity_summary as
+    select *
+    from charity_totals t, charities c
+    where t.charity_name = c.name
+    `
     ];
     Promise.all(create_table_statements.map((statement) => db.query(statement))).then(() => {next()}, console.log);
 
