@@ -15,24 +15,111 @@
 </head>
 <body>
 
+
 <div class="row">
-    <div class="col-md-6"><span id="charityName-info">Charity Name</span>
+    <div class="project-name col-sm-6">
+        <b>Can Deux</b>
     </div>
-    <div class="col-md-6"><img src=""></div>
+    <div class="col-sm-6">
+    <button id="#btnBack" class="btn btn-lg btn-info" style="float: right"
+            onclick='document.location.href="/"'>Back</button></div>
 </div>
 
-<div class=""></div>
+
+<div class="row">
+    <div class="col-sm-8">
+        <span class="h3">Our current cause:</span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6"><span id="charityName-info"></span>
+    </div>
+    <div class="col-sm-6"><img id="charityLogo" src=""></div>
+</div>
+
+<div class="row">
+    <div id="location" class="col-sm-12"></div>
+</div>
+
+<div id="description"></div>
+
+
+<div class="all-charities-wrapper">
+    <button id="toggleAllBtn" data-toggle='collapse' data-target="#allCharitiesTable" class="btn btn-info btn-md">Tap to see all our causes</button>
+</div>
+
+<div id="allCharitiesTable" class="collapse">
+
+</div>
 
 </body>
 </html>
 
 <script type="text/javascript">
 
-    $(document.ready(function () {
+    $(document).ready(function () {
+        $.ajax(
+            {
+                url: "/api/charities/current",
+                type: 'GET',
+                success: function (result) {
+                    getCharityInfo(result.name);
+                },
+                error: function(e) {
+                    console.log(e);
+                }
+            }
+        );
 
-    }));
+        $.ajax(
+            {
+                url: "/api/charities",
+                type: 'GET',
+                success: function (result) {
+                    let tblHtml = "<table class='table'><thead><tr><th></th><th>Name</th>" +
+                        "<th>Location</th><th>Description</th><th>Total Earned</th></tr></thead><tbody>";
+                    $.each(result, function(i, val) {
+                        let imgUrl = val.imgurl;
+                        let desc = val.description;
+                        let name = val.name;
+                        let location = val.location;
+                        let websiteUrl = val.weburl;
+                        let totalEarned = val.total_earned;
+                        tblHtml += "<tr>";
+                        tblHtml += `<td><img class='tbl-logo' src='${imgUrl}'></td>`;
+                        tblHtml += `<td><a href="${websiteUrl}">${name}</a></td><td>${location}</td><td>${desc}</td>`;
+                        tblHtml += `<td>$${totalEarned}</td>`;
+                        tblHtml += "</tr>"
+                    });
+                    tblHtml += "</table>";
 
-    function getCharityName(name) {
+                $('#allCharitiesTable').html(tblHtml)
+                },
+                error: function(e) {
+                    console.log(e);
+                }
+            }
+        );
+    });
 
+    function getCharityInfo(name) {
+        $.ajax(
+            {
+                url: "/api/charities/" + name,
+                type: 'GET',
+                success: function (result) {
+                    let charityName = result.name;
+                    $('#charityName-info').html(name);
+                    $('#charityLogo').attr('src', result.imgurl);
+                    $('#location').html(result.location);
+                    $('#description').html(result.description)
+                },
+                error: function(e) {
+                    console.log(e);
+                }
+            }
+        );
     }
+
 </script>
