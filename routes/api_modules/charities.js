@@ -30,7 +30,7 @@ router.route("/:name")
         db.query("select * from charities c where c.name = $1", (err, rows) => {
             if (err)
                 next(err);
-            else if (rows.rows.length() === 0)
+            else if (rows.rows.length === 0)
                 next();
             else
                 res.json(rows.rows[0]);
