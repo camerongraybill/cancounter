@@ -19,7 +19,7 @@ router.route("/:name")
         db.query("select * from kiosk_summary k where k.name = $1", [req.params.name], (err, rows) => {
             if (err)
                 next(err);
-            else if (rows.length() === 0)
+            else if (rows.rows.length() === 0)
                 next();
             else
                 res.json(rows.rows[0]);
