@@ -37,7 +37,8 @@ a {
 /* Charity Page Styles */
 
 #charityLogo {
-    width: 400px;
+    max-height: 250px;
+    float: right;
 }
 
 #charityName-info {
