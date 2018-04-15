@@ -1,6 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: #adffb8 !important;
 }
 
 a {
@@ -14,7 +15,8 @@ a {
 }
 
 #currentCharityLogo {
-    width: 250px;
+    max-width: 500px;
+    max-height: 500px;
     padding: 15px;
 }
 
@@ -24,13 +26,37 @@ a {
 
 .project-name {
     color: green;
-    font-size: 24px;
+    font-size: 36px;
 }
 
 .past-hour-money {
     padding: 10px;
+    font-size: 24px;
 }
 
 
 /* Charity Page Styles */
 
+#charityLogo {
+    width: 400px;
+}
+
+#charityName-info {
+    font-size: 40px;
+}
+
+#description {
+    font-size: 16px;
+}
+
+.tbl-logo {
+    width: 100px;
+}
+
+#toggleAllBtn {
+    margin-top: 45px;
+}
+
+#charityInfoBtn {
+    margin-top: 100px;
+}
