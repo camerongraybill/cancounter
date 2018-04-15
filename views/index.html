@@ -74,9 +74,9 @@
                 type: 'GET',
                 success: function (result) {
                     let money = result.total_earned;
-                    let moneyPastHour = result.total_earned; //TODO: FIXME
-                    $("#totalMoney").html(money);
-                    $("#pastHourMoney").html(moneyPastHour);
+                    let moneyPastHour = result.money_in_last_hour; 
+                    $("#totalMoney").html('$'+money);
+                    $("#pastHourMoney").html('$'+moneyPastHour);
                 },
                 error: function(e) {
                     console.log(e);
