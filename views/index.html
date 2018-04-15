@@ -11,6 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cherry+Cream+Soda" rel="stylesheet">
     <title>Kiosk Landing Page</title>
 </head>
 <body>
@@ -20,17 +21,14 @@
         <b>Can Deux</b>
     </div>
     <div class="total-money-counter col-sm-6">
-        <b>Lifetime money raised:</b> <br/><span id="totalMoney"></span>
+        <b>Total raised:</b> <br/><span id="totalMoney"></span>
     </div>
 </div>
 
 
 <div id="kioskWrapper">
-    <!--<div class="header-msg">-->
-        <!--<h1>Insert your cans above</h1>-->
-    <!--</div>-->
     <div class="past-hour-money">
-       <b>Dollars raised in past hour:</b> <span id="pastHourMoney"></span>
+       <b>Raised in past hour:</b> <span id="pastHourMoney"></span>
     </div>
 
     <div class="charity-wrapper">
@@ -40,7 +38,7 @@
     </div>
 
     <button id="charityInfoBtn" onclick='document.location.href="/charities"'
-            class="btn btn-info btn-lg">Learn more about our current charity</button>
+            class="btn btn-info btn-lg">Learn more about our current cause</button>
     </div>
 </div>
 
@@ -74,7 +72,7 @@
                 type: 'GET',
                 success: function (result) {
                     let money = result.total_earned;
-                    let moneyPastHour = result.money_in_last_hour; 
+                    let moneyPastHour = result.money_in_last_hour;
                     $("#totalMoney").html('$'+money);
                     $("#pastHourMoney").html('$'+moneyPastHour);
                 },

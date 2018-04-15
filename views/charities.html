@@ -11,6 +11,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Cherry+Cream+Soda" rel="stylesheet">
+
     <title>Charity Info</title>
 </head>
 <body>
@@ -18,7 +20,7 @@
 
 <div class="row">
     <div class="project-name col-sm-6">
-        <b>Can Deux</b>
+        <b>Our current cause</b>
     </div>
     <div class="col-sm-6">
     <button id="#btnBack" class="btn btn-lg btn-info" style="float: right"
@@ -27,26 +29,27 @@
 
 
 <div class="row">
-    <div class="col-sm-8">
-        <span class="h3">Our current cause:</span>
+    <div class="col-sm-6"><span id="charityName-info"></span>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-sm-6"><span id="charityName-info"></span>
-    </div>
-    <div class="col-sm-6"><img id="charityLogo" src=""></div>
-</div>
 
 <div class="row">
     <div id="location" class="col-sm-12"></div>
 </div>
+<div class="row">
+    <div class="col-sm-12">Can Deux has raised <span id="totalRaisedCharity"></span> for this non-profit.</div>
+</div>
 
-<div id="description"></div>
+<div class="row">
+    <div class="col-sm-4"><img id="charityLogo" src=""></div>
+    <div class="col-sm-8" id="description"></div>
+</div>
+
 
 
 <div class="all-charities-wrapper">
-    <button id="toggleAllBtn" data-toggle='collapse' data-target="#allCharitiesTable" class="btn btn-info btn-md">Tap to see all our causes</button>
+    <button id="toggleAllBtn" data-toggle='collapse' data-target="#allCharitiesTable" class="btn btn-info btn-lg">Tap to see all our causes</button>
 </div>
 
 <div id="allCharitiesTable" class="collapse">
@@ -113,7 +116,8 @@
                     $('#charityName-info').html(name);
                     $('#charityLogo').attr('src', result.imgurl);
                     $('#location').html(result.location);
-                    $('#description').html(result.description)
+                    $('#description').html(result.description);
+                    $('#totalRaisedCharity').html('$' + result.total_earned);
                 },
                 error: function(e) {
                     console.log(e);

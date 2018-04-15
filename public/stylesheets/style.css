@@ -1,6 +1,6 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
     background-color: #adffb8 !important;
 }
 
@@ -16,7 +16,8 @@ a {
 
 #currentCharityLogo {
     max-width: 500px;
-    padding: 15px;
+    max-height: 325px;
+    padding: 5px;
 }
 
 .total-money-counter {
@@ -26,6 +27,7 @@ a {
 .project-name {
     color: green;
     font-size: 36px;
+    font-family: Cherry cream soda, cursive;
 }
 
 .past-hour-money {
