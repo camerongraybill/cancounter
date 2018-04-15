@@ -5,7 +5,7 @@ db = require("../../db").db;
 router.route("")
     .get((req, res, next) => {
         // Return all kiosks
-        db.query("select * from kiosk_summary", [req.params.name], (err, rows) => {
+        db.query("select * from kiosk_summary", (err, rows) => {
             if (err)
                 next(err);
             else
