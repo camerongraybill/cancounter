@@ -41,7 +41,7 @@ router.route("/:name/add")
                     else if (active_charity.rows.length === 0)
                         next();
                     else
-                        db.query("insert into can_submissions values ($1, now(), $2)", [name_rows.rows[0]['id'], active_charity.rows[0]['name']], (err) => {
+                        db.query("insert into can_submissions values ($1, now(), $2)", [name_rows.rows[0]['id'], active_charity.rows[0]['charity_name']], (err) => {
                             if (err)
                                 next(err);
                             else
