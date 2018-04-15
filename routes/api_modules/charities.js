@@ -9,7 +9,7 @@ router.route("")
             if (err)
                 next(err);
             else
-                res.json(rows);
+                res.json(rows.rows);
         });
     });
 
@@ -20,11 +20,7 @@ router.route("/current")
             if (err)
                 next(err);
             else
-                res.json(rows[0]);
-        });
-        res.json({
-            name: 'CCI',
-            imgurl: 'http://drexel.edu/~/media/Images/cci/Logos/College_ComputingInformatics-oneline100height.ashx?h=100&w=642&hash=9475C156117BEE0FA24744513A2052C69AAA1FF9'
+                res.json(rows.rows[0]);
         });
     });
 
@@ -34,10 +30,10 @@ router.route("/:name")
         db.query("select * from charities c where c.name = $1", (err, rows) => {
             if (err)
                 next(err);
-            else if (rows.length() === 0)
+            else if (rows.rows.length() === 0)
                 next();
             else
-                res.json(rows[0]);
+                res.json(rows.rows[0]);
         });
     });
 

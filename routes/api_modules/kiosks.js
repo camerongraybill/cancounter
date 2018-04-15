@@ -9,7 +9,7 @@ router.route("")
             if (err)
                 next(err);
             else
-                res.json(rows);
+                res.json(rows.rows);
         })
     });
 
@@ -19,11 +19,10 @@ router.route("/:name")
         db.query("select * from kiosk_summary k where k.name = $1", [req.params.name], (err, rows) => {
             if (err)
                 next(err);
-
             else if (rows.length() === 0)
                 next();
             else
-                res.json(rows[0]);
+                res.json(rows.rows[0]);
         });
     });
 
@@ -33,16 +32,16 @@ router.route("/:name/add")
         db.query("select id from kiosks where name = $1", [req.params.name], (err, name_rows) => {
             if (err)
                 next(err);
-            else if (name_rows.length() === 0)
+            else if (name_rows.rows.length() === 0)
                 next();
             else
                 db.query("select charity_name from active_ranges where end_time is null", (err, active_charity) => {
                     if (err)
                         next(err);
-                    else if (active_charity.length() === 0)
+                    else if (active_charity.rows.length() === 0)
                         next();
                     else
-                        db.query("insert into can_submissions (kiosk, charity) values ($1, $2)", [name_rows[0]['id'], active_charity[0]['name']], (err) => {
+                        db.query("insert into can_submissions (kiosk, charity) values ($1, $2)", [name_rows.rows[0]['id'], active_charity.rows[0]['name']], (err) => {
                             if (err)
                                 next(err);
                             else
