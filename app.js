@@ -39,7 +39,7 @@ app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveU
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/', require("./routes/index"));
+app.use('/', require("./routes/index").router);
 app.use('/api', require("./routes/api"));
 app.use('/admin', require("./routes/admin"));
 app.use("/charities", require("./routes/charities"));
